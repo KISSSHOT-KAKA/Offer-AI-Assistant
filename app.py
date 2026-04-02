@@ -19,7 +19,8 @@ st.markdown("上传学生的 Offer 文件 (支持 PDF/图片)，AI 将自动提�
 @st.cache_resource
 def load_ai_models():
     # 强制开启 use_angle_cls=True，消灭倒立/歪斜图片的克星
-    ocr_engine = PaddleOCR(use_angle_cls=True, lang="ch")
+    # 明确告诉引擎：不要使用高级 CPU 硬件优化，以兼容性为主！
+    ocr_engine = PaddleOCR(use_angle_cls=True, lang="ch", ir_optim=False)
     llm_client = OpenAI(
         api_key=st.secrets["ZHIPU_API_KEY"], # <-- 换成这个“代号”  # <--- 🚨 请在这里填入你的智谱 API Key
         base_url="https://open.bigmodel.cn/api/paas/v4/"
