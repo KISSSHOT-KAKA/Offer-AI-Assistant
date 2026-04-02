@@ -24,9 +24,10 @@ def load_ai_models():
 try:
     client = load_ai_models()
 except Exception as e:
-    st.error("模型加载失败，请检查云端 Secrets 是否填写了 ZHIPU_API_KEY")
+    st.error("🚨 模型加载失败了！底层的真实报错信息如下：")
+    st.code(str(e))  # 把真正的内鬼暴露出来！
+    st.write("如果上面写着 KeyError: 'ZHIPU_API_KEY'，说明 Streamlit 真的没读到密码；如果是别的，说明问题出在别的库上。")
     st.stop()
-
 
 # --- 辅助函数：图片转 Base64 编码 ---
 def encode_image_to_base64(image_path):
