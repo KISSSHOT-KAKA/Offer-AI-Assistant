@@ -79,8 +79,12 @@ if st.button("🚀 一键智能解析并生成报表", type="primary"):
                 file_ext = os.path.splitext(file_name)[1].lower()
                 status_text.info(f"⏳ 正在处理: {file_name} ({i + 1}/{total_files})...")
 
-                # 把网页里的内存文件，临时存到服务器硬盘上
-                temp_file_path = os.path.join(temp_dir, file_name)
+                # 🚨【架构师黑科技：狸猫换太子】🚨
+                # 为了防止 OpenCV 读取中文路径时报 TypeError 返回 None
+                # 我们在硬盘上强制使用纯英文的序号命名，避开所有特殊字符！
+                safe_temp_name = f"temp_upload_{i}{file_ext}"
+                temp_file_path = os.path.join(temp_dir, safe_temp_name)
+
                 with open(temp_file_path, "wb") as f:
                     f.write(uploaded_file.getbuffer())
 
