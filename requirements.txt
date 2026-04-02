@@ -1,6 +1,7 @@
 streamlit
 paddlepaddle
 paddleocr
+opencv-python-headless
 PyMuPDF
 openai
 pandas
